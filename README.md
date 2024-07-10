@@ -16,17 +16,17 @@ API keys for API Ninjas Weather API and OpenCage Geocoding API
 
 ### File Structure
 weather-app/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Dashboard.js
-│   │   ├── SignUp.js
-│   │   └── WeatherCard.js
-│   ├── firebase.js
-│   ├── App.js
-│   ├── index.js
-│   └── ...
-├── .gitignore
-├── package.json
-└── README.md
+    public/
+        index.html
+    src/ 
+        components/
+            Dashboard.js
+            SignUp.js
+            WeatherCard.js 
+      firebase.js
+      App.js
+      index.js
+  ...
+  .gitignore
+  package.json
+  README.md
