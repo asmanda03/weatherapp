@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { db } from '../firebase';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 import WeatherCard from './WeatherCard';
 
 const Dashboard = ({ user }) => {
@@ -34,7 +34,6 @@ const Dashboard = ({ user }) => {
   };
 
   const addFavorite = async (city) => {
-    console.log(city, user)
     try {
       await addDoc(collection(db, "favorites"), {
         userId: user.uid,
@@ -48,8 +47,9 @@ const Dashboard = ({ user }) => {
 
   const fetchFavorites = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "favorites"));
-      const userFavorites = querySnapshot.docs.filter(doc => doc.data().userId === user.uid).map(doc => doc.data().city);
+      const q = query(collection(db, "favorites"), where("userId", "==", user.uid));
+      const querySnapshot = await getDocs(q);
+      const userFavorites = querySnapshot.docs.map(doc => doc.data().city);
       setFavorites(userFavorites);
     } catch (error) {
       console.error("Error fetching favorites:", error);
@@ -63,7 +63,7 @@ const Dashboard = ({ user }) => {
   }, [user]);
 
   return (
-    <div>
+    <div className="container">
       <h2>Dashboard</h2>
       <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Enter city" />
       <button onClick={fetchWeather}>Get Weather</button>
