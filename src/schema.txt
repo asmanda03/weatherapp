@@ -1,0 +1,35 @@
+Crow's Foot ERD Diagram Description
+
+Entities:
+---------
+1. Users
+   - user_id (PK)
+   - email (Unique)
+   - password
+   - created_at
+
+2. Cities
+   - city_id (PK)
+   - city_name
+   - latitude
+   - longitude
+
+3. Favorites
+   - favorite_id (PK)
+   - user_id (FK) references Users(user_id)
+   - city_id (FK) references Cities(city_id)
+
+Relationships:
+--------------
+1. Users to Favorites:
+   - One-to-Many (One user can have many favorite cities)
+   - Represented as (1) <--> (N)
+
+2. Cities to Favorites:
+   - One-to-Many (One city can be favorited by many users)
+   - Represented as (1) <--> (N)
+
+Diagram:
+--------
+Users (1) <--> (N) Favorites
+Cities (1) <--> (N) Favorites
